@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\abdel\\Desktop\\Galgje\\RaadHetWoordClient\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\abdel\\Desktop\\Galgje\\RaadHetWoordClient\\obj\\Debug\\net8.0\\compressed\\kn416rqifd.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\abdel\\Desktop\\Galgje\\RaadHetWoordClient\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\abdel\\Desktop\\Galgje\\RaadHetWoordClient\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\abdel\\Desktop\\Galgje\\RaadHetWoordClient\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.RaadHetWoordClient.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.RaadHetWoordClient.props",
+      "PackagePath": "build\\RaadHetWoordClient.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.RaadHetWoordClient.props",
+      "PackagePath": "buildMultiTargeting\\RaadHetWoordClient.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.RaadHetWoordClient.props",
+      "PackagePath": "buildTransitive\\RaadHetWoordClient.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

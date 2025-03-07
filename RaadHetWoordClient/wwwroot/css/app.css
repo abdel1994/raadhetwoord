@@ -1,0 +1,89 @@
+/* Algemene stijlen voor de Blazor WebAssembly-app */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Container voor de game */
+.game-container {
+    margin: 50px auto;
+    width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Gemaskeerd woord */
+.masked-word {
+    font-size: 24px;
+    letter-spacing: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Inputveld en knop */
+input[type="text"] {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    font-size: 24px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Berichten */
+.message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff0000;
+    margin-top: 20px;
+}
+
+/* Beurten over */
+.attempts {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Start-knop */
+.start-button {
+    background: #28a745;
+}
+
+.start-button:hover {
+    background: #218838;
+}
+
+/* Game gewonnen/verloren */
+.win {
+    color: green;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.lose {
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+}

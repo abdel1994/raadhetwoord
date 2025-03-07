@@ -1,0 +1,100 @@
+@page "/"
+@inject HttpClient Http
+
+<div class="game-container">
+    <h3>Hangman Game</h3>
+
+    @if (gameId == null)
+    {
+        <button class="start-button" @onclick="StartGame">Start Game</button>
+    }
+    else
+    {
+        <p class="masked-word">@maskedWord</p>
+        <p class="attempts">Attempts Left: @attemptsLeft</p>
+
+        @if (!isGameOver)
+        {
+            <input @bind="guessLetter" maxlength="1" />
+            <button @onclick="MakeGuess">Guess</button>
+        }
+        else
+        {
+            <p class="@gameMessageClass">@gameMessage</p>
+            <button class="start-button" @onclick="StartGame">Restart</button>
+        }
+    }
+</div>
+
+@code {
+    private string? gameId;
+    private string maskedWord = "";
+    private int attemptsLeft = 7;
+    private bool isGameOver = false;
+    private string gameMessage = "";
+    private char guessLetter;
+    private string gameMessageClass = "";
+
+    private async Task StartGame()
+    {
+        var response = await Http.PostAsync("api/game/new", null);
+        var result = await response.Content.ReadFromJsonAsync<GameResponse>();
+
+        if (result != null)
+        {
+            gameId = result.GameId;
+            maskedWord = result.MaskedWord;
+            attemptsLeft = result.AttemptsLeft;
+            isGameOver = false;
+            gameMessage = "";
+            gameMessageClass = "";
+        }
+    }
+
+    private async Task MakeGuess()
+    {
+        if (gameId == null) return;
+
+        var response = await Http.PostAsJsonAsync($"api/game/{gameId}/guess", guessLetter);
+        var result = await response.Content.ReadFromJsonAsync<GameResponse>();
+
+        if (result != null)
+        {
+            maskedWord = result.MaskedWord;
+            attemptsLeft = result.AttemptsLeft;
+            isGameOver = result.GameOver;
+
+            if (isGameOver)
+            {
+                await CheckGameOver();
+            }
+        }
+    }
+
+    private async Task CheckGameOver()
+    {
+        var response = await Http.GetFromJsonAsync<GameOverResponse>($"api/game/{gameId}/isGameOver");
+
+        if (response != null)
+        {
+            gameMessage = response.Message;
+            gameMessageClass = response.IsWon ? "win" : "lose";
+            isGameOver = response.IsGameOver;
+        }
+    }
+
+    private class GameResponse
+    {
+        public string GameId { get; set; }
+        public string MaskedWord { get; set; }
+        public int AttemptsLeft { get; set; }
+        public bool GameOver { get; set; }
+    }
+
+    private class GameOverResponse
+    {
+        public bool IsGameOver { get; set; }
+        public bool IsWon { get; set; }
+        public string Message { get; set; }
+    }
+}

@@ -1,0 +1,42 @@
+# is blijkbaar nier meer nodig en wordt genegeerd ! version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: raadhetwoord_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: geheim
+      POSTGRES_DB: raadhetwoord
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: RaadHetWoordApi/Dockerfile
+    container_name: raadhetwoord_api
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=localhost;Database=raadhetwoord;Username=admin;Password=geheim
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+  
+  client:
+    build:
+      context: ./RaadHetWoordClient
+      dockerfile: ./Dockerfile
+    container_name: raadhetwoord-client
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data: {}

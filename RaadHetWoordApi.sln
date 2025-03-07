@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaadHetWoordApi", "RaadHetWoordApi\RaadHetWoordApi.csproj", "{6C79B6D9-C390-467D-AF01-F117FC649F32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaadHetWoordClient", "RaadHetWoordClient\RaadHetWoordClient.csproj", "{F4C78B5F-DFF9-4C3B-BD83-F3F6BB4A1EBE}"
+EndProject
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C79B6D9-C390-467D-AF01-F117FC649F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C79B6D9-C390-467D-AF01-F117FC649F32}.Debug|Any CdockPU.Build.0 = Debug|Any CPU
+		{6C79B6D9-C390-467D-AF01-F117FC649F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C79B6D9-C390-467D-AF01-F117FC649F32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4C78B5F-DFF9-4C3B-BD83-F3F6BB4A1EBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4C78B5F-DFF9-4C3B-BD83-F3F6BB4A1EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4C78B5F-DFF9-4C3B-BD83-F3F6BB4A1EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4C78B5F-DFF9-4C3B-BD83-F3F6BB4A1EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCA34859-38BA-43A1-97D0-64B6A15E21A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCA34859-38BA-43A1-97D0-64B6A15E21A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCA34859-38BA-43A1-97D0-64B6A15E21A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCA34859-38BA-43A1-97D0-64B6A15E21A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
