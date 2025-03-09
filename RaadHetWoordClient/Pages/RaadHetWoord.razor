@@ -16,7 +16,8 @@
         @if (!isGameOver)
         {
             <input @bind="guessLetter" maxlength="1" />
-            <button @onclick="MakeGuess">Guess</button>
+            <button @onclick="MakeGuess" value="">Guess</button>
+
         }
         else
         {

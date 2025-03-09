@@ -1,7 +1,7 @@
 /* Algemene stijlen voor de Blazor WebAssembly-app */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #708cb7;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -12,7 +12,7 @@ body {
     margin: 50px auto;
     width: 400px;
     padding: 20px;
-    background: white;
+    background: rgb(112, 70, 218);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

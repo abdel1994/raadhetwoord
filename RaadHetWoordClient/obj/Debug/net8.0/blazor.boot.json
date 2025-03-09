@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "RaadHetWoordClient",
   "resources": {
-    "hash": "sha256-t3/V9odZ6WtNcttcQhEPEElVE5P9snLML3Ytq47gBMY=",
+    "hash": "sha256-dAUxEU6cI9M2MS9hBzNL5lJFLbwtHEnh+LyJNZgYXJg=",
     "jsModuleNative": {
       "dotnet.native.8.0.13.wavxsau8t5.js": "sha256-xNQsYHtL1vcbrVTHDZAwJM4WovpoyjsrM2C6FQ8cW1w="
     },
@@ -208,10 +208,10 @@
       "mscorlib.wasm": "sha256-RAf5jgXLg+06C4tJ3CabxAZaVjCN2/+E6fxRjRN8yHk=",
       "netstandard.wasm": "sha256-KCAE8RQwTurP5pGnGF819qf9sK++2O0rXzt6tOjlfi8=",
       "System.Private.CoreLib.wasm": "sha256-LQqLbHgeEX4HONx7GwIxGgmzIXP6n2OPxqnq+/4Tyqk=",
-      "RaadHetWoordClient.wasm": "sha256-Xw6axWEgWP/HaG0ChHYKHoFSBwE4gqB95isYFzd8c9U="
+      "RaadHetWoordClient.wasm": "sha256-V8bUA+fEYMurgAf/J1ubz8nltyDoW9xyUvStiJqd5zk="
     },
     "pdb": {
-      "RaadHetWoordClient.pdb": "sha256-4Wq5fcm4POpDuPPww7+eePEx36KC6q0GHOaL8pa260Y="
+      "RaadHetWoordClient.pdb": "sha256-Nq9A2NaLbqoJmVYaVMfPnNgNW4v8y4ruZlugA8slHZ8="
     }
   },
   "cacheBootResources": true,

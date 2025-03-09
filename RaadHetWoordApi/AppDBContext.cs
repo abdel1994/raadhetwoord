@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+using RaadHetWoordApi.Models;
 
 namespace RaadHetWoordApi.Data
 {
@@ -8,12 +8,5 @@ namespace RaadHetWoordApi.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Woord> Woorden { get; set; }
-    }
-
-    public class Woord
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Tekst { get; set; } = string.Empty;
     }
 }

@@ -1,20 +1,56 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RaadHetWoordApi.Data;
+using RaadHetWoordApi.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 [Route("api/game")]
 [ApiController]
 public class GameController : ControllerBase
 {
-    private static readonly List<string> Words = new List<string> { "apple", "banana", "cherry" };  // dit straks vanuit postgesql halen
     private static readonly Dictionary<string, GameState> Games = new();
+    private readonly AppDbContext _context;
+
+    public GameController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet("random")]
+    public IActionResult GetRandomWoord()
+    {
+        var randomWoord = _context.Woorden
+            .OrderBy(x => Guid.NewGuid())
+            .Select(w => w.Tekst) // Haal alleen de tekst op
+            .FirstOrDefault();
+
+        if (randomWoord == null) return NotFound("No words found");
+
+        return Ok(new { woord = randomWoord });
+    }
 
     [HttpPost("new")]
     public IActionResult StartGame()
     {
-        var gameId = Guid.NewGuid().ToString();
-        var word = Words[new Random().Next(Words.Count)];
-        var maskedWord = new string('_', word.Length); // "______" voor "apple" bv.
+        var randomWoord = _context.Woorden
+            .OrderBy(x => Guid.NewGuid())
+            .Select(w => w.Tekst)
+            .FirstOrDefault();
 
-        Games[gameId] = new GameState { Word = word, MaskedWord = maskedWord, AttemptsLeft = 7, GameOver = false };
+        if (randomWoord == null) return NotFound("No words found");
+
+        var gameId = Guid.NewGuid().ToString();
+        var maskedWord = new string('_', randomWoord.Length);
+
+        Games[gameId] = new GameState
+        {
+            Word = randomWoord,
+            MaskedWord = maskedWord,
+            AttemptsLeft = 7,
+            GameOver = false
+        };
 
         return Ok(new { gameId, maskedWord, attemptsLeft = 7 });
     }
@@ -38,7 +74,6 @@ public class GameController : ControllerBase
             game.AttemptsLeft--;
         }
 
-        // Controleer of de game voorbij is na een gok, als een van de twee voorwaarden true is dan wordt game.Gameover = true;
         game.GameOver = game.MaskedWord == game.Word || game.AttemptsLeft <= 0;
 
         return Ok(new { game.MaskedWord, game.AttemptsLeft, game.GameOver });
@@ -51,7 +86,7 @@ public class GameController : ControllerBase
 
         bool isWon = game.MaskedWord == game.Word;
         bool isLost = game.AttemptsLeft <= 0;
-        game.GameOver = isWon || isLost; // Zet de status als de game voorbij is
+        game.GameOver = isWon || isLost;
 
         var response = new
         {
@@ -59,7 +94,7 @@ public class GameController : ControllerBase
             isGameOver = game.GameOver,
             isWon = isWon,
             isLost = isLost,
-            message = isWon ? "You won! 🎉" : (isLost ? "Game over! ❌" : "Keep guessing!")
+            message = isWon ? "You won! 🎉" : (isLost ? "Game over! ❌" + "Het Woord was" + " " + game.Word  : "Keep guessing!")
         };
 
         return Ok(response);
@@ -71,5 +106,6 @@ public class GameController : ControllerBase
         public string MaskedWord { get; set; }
         public int AttemptsLeft { get; set; }
         public bool GameOver { get; set; }
+
     }
 }

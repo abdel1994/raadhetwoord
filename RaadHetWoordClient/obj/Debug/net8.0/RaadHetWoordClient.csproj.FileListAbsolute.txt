@@ -1026,3 +1026,4 @@ C:\Users\abdel\Desktop\Galgje\RaadHetWoordClient\obj\Debug\net8.0\RaadHetWoordCl
 C:\Users\abdel\Desktop\Galgje\RaadHetWoordClient\obj\Debug\net8.0\refint\RaadHetWoordClient.dll
 C:\Users\abdel\Desktop\Galgje\RaadHetWoordClient\obj\Debug\net8.0\RaadHetWoordClient.pdb
 C:\Users\abdel\Desktop\Galgje\RaadHetWoordClient\obj\Debug\net8.0\ref\RaadHetWoordClient.dll
+C:\Users\abdel\Desktop\Galgje\RaadHetWoordClient\obj\Debug\net8.0\RaadHetWoordClient.sourcelink.json

@@ -133,3 +133,4 @@ C:\Users\abdel\Desktop\Galgje\RaadHetWoordApi\bin\Debug\net8.0\tr\Microsoft.Code
 C:\Users\abdel\Desktop\Galgje\RaadHetWoordApi\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\abdel\Desktop\Galgje\RaadHetWoordApi\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\abdel\Desktop\Galgje\RaadHetWoordApi\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+c:\Users\abdel\Desktop\Galgje\RaadHetWoordApi\obj\Debug\net8.0\RaadHetWoordApi.sourcelink.json

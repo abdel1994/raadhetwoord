@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RaadHetWoordApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7c8b931485fb7c3fbb23a352eb44f82b89dd2cd")]
 [assembly: System.Reflection.AssemblyProductAttribute("RaadHetWoordApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RaadHetWoordApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
