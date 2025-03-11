@@ -1,61 +1,95 @@
-
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.OpenApi.Models;
 using RaadHetWoordApi.Data;
 using RaadHetWoordApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Voeg controllers en Swagger toe
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "RaadHetWoord API", Version = "v1" });
-});
+// ✅ API moet luisteren op alle IP’s voor Docker-compatibiliteit
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
-// connectionstring ophalen uit appsettings.json, dit is de connectie met de database, in dit geval postgresql
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
-
-// CORS (voor Blazor WebAssembly toegang)
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll",
-        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-});
-
-// Kestrel configureren voor Docker
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(5000); // Zorgt ervoor dat de API luistert op alle netwerken
-});
+// ✅ Configureer services
+ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 
-// haal de woorden op uit een bestand en importeer ze in de database
-using (var scope = app.Services.CreateScope())
+// ✅ Configureer de middleware (volgorde is belangrijk!)
+ConfigureMiddleware(app);
+
+Console.WriteLine("🚀 API draait op http://localhost:5000");
+app.Run();
+
+
+// ==========================================
+// 🔹 Configureer services
+// ==========================================
+void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    ImportWoorden(context, "woorden.txt");
+    // ✅ Voeg controllers en Swagger toe
+    services.AddControllers();
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "RaadHetWoord API", Version = "v1" });
+    });
+
+    // ✅ Databaseverbinding ophalen uit appsettings.json
+    var connectionString = configuration.GetConnectionString("DefaultConnection");
+    services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
+
+    // ✅ CORS instellen voor Blazor WebAssembly
+    services.AddCors(options =>
+    {
+        options.AddPolicy("AllowBlazorFrontend",
+            builder => builder
+                .WithOrigins("http://localhost:8080") // Blazor frontend URL
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()); // Alleen nodig bij cookies/authenticatie
+    });
 }
 
-
-// Gebruik Swagger en API-documentatie
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+// ==========================================
+// 🔹 Configureer middleware
+// ==========================================
+void ConfigureMiddleware(WebApplication app)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RaadHetWoord API v1"));
+    // ✅ CORS moet vóór `UseRouting()` worden geplaatst
+    app.UseCors("AllowBlazorFrontend");
+
+    app.UseRouting();
+    app.UseAuthorization();
+    app.MapControllers();
+
+    // ✅ Database controleren en woorden importeren
+    try
+    {
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Console.WriteLine("✅ Databaseverbinding succesvol!");
+        ImportWoorden(context, "woorden.txt");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"❌ Fout bij databaseverbinding: {ex.Message}");
+    }
+
+    // ✅ Gebruik Swagger en API-documentatie
+    if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RaadHetWoord API v1"));
+    }
 }
 
-// Importeer woorden in de database waarbij elk woord op een nieuwe regel staat
+// ==========================================
+// 🔹 Woorden importeren in database
+// ==========================================
 void ImportWoorden(AppDbContext context, string filePath)
 {
     if (!File.Exists(filePath))
     {
-        Console.WriteLine($"Bestand {filePath} niet gevonden.");
+        Console.WriteLine($"❌ Bestand {filePath} niet gevonden.");
         return;
     }
 
@@ -68,17 +102,10 @@ void ImportWoorden(AppDbContext context, string filePath)
     {
         context.Woorden.AddRange(woorden);
         context.SaveChanges();
-        Console.WriteLine($"{woorden.Count} woorden geïmporteerd!");
+        Console.WriteLine($"✅ {woorden.Count} woorden geïmporteerd!");
     }
     else
     {
-        Console.WriteLine("Geen woorden om te importeren.");
+        Console.WriteLine("⚠️ Geen woorden om te importeren.");
     }
 }
-
-
-app.UseCors("AllowAll"); // CORS inschakelen
-app.UseRouting();    // Routing inschakelen , routing is het proces van het bepalen van de beste manier om een pakket van de bron naar de bestemming te sturen
-app.UseAuthorization();  // Autorisatie inschakelen, autorisatie is het proces van het bepalen of een gebruiker toegang heeft tot een bepaalde bron of actie
-app.MapControllers();  // Controllers inschakelen, controllers zijn klassen die verantwoordelijk zijn voor het verwerken van inkomende verzoeken en het retourneren van antwoorden aan de client
-app.Run();

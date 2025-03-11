@@ -11,8 +11,8 @@ using RaadHetWoordApi.Data;
 namespace RaadHetWoordApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250308213348_xyz")]
-    partial class xyz
+    [Migration("20250311200839_pleaseHelp")]
+    partial class pleaseHelp
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

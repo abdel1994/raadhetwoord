@@ -87,6 +87,7 @@ public class GameController : ControllerBase
         bool isWon = game.MaskedWord == game.Word;
         bool isLost = game.AttemptsLeft <= 0;
         game.GameOver = isWon || isLost;
+        
 
         var response = new
         {
@@ -94,7 +95,7 @@ public class GameController : ControllerBase
             isGameOver = game.GameOver,
             isWon = isWon,
             isLost = isLost,
-            message = isWon ? "You won! 🎉" : (isLost ? "Game over! ❌" + "Het Woord was" + " " + game.Word  : "Keep guessing!")
+            message = isWon ? "You won! 🎉" : (isLost ? "Game over! ❌" + "Het Woord was" + "  " + game.Word  : "Keep guessing!")
         };
 
         return Ok(response);

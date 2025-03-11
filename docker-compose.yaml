@@ -22,9 +22,9 @@ services:
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Host=localhost;Database=raadhetwoord;Username=admin;Password=geheim
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=raadhetwoord;Username=admin;Password=geheim
     ports:
-      - "5000:5000"
+      - "5003:5000"
     depends_on:
       - postgres
   

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RaadHetWoordClient")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7c8b931485fb7c3fbb23a352eb44f82b89dd2cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ec4715745fa61a12529fbc94e8753abc79a5ff6")]
 [assembly: System.Reflection.AssemblyProductAttribute("RaadHetWoordClient")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RaadHetWoordClient")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
